@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 function Header() {
   // Retrieve the saved theme or default to 'light'
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "light"
   );
-
+  const onlineStatus =useOnlineStatus();
   // Apply theme to the HTML root element
   useEffect(() => {
     if (theme === "dark") {
@@ -37,12 +39,14 @@ function Header() {
               Mode
             </button>
           </li>
-          <li className="px-8 mt-8">Home</li>
-          <li className="px-8 mt-8">About Us</li>
-          <li className="px-8 mt-8">Contact Us</li>
+          
+          <Link to="/"><li className="px-8 mt-8">Home</li></Link>
+          <Link to="/About"><li className="px-8 mt-8">About Us</li></Link>
+          <Link to="/ContactUs"><li className="px-8 mt-8">Contact Us</li></Link>
           <li className="px-8 mt-8">Search</li>
-          <li className="px-8 mt-8">Profile</li>
-          <li className="px-8 mt-8">Cart</li>
+          <Link to="/Profile"><li className="px-8 mt-8">Profile</li></Link>
+          <Link to="/Cart"><li className="px-8 mt-8">Cart</li></Link>
+          <li className="px-8 mt-8">You are: {onlineStatus ? "Online 🟢":"Offline 🔴"}</li>
         </ul>
       </div>
     </div>

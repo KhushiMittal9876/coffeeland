@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Coffeeitem from './Coffeeitem';
 import resObj from '../utils/mockdata'; 
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 function Body() {
   const [listofCoffee,setListofCoffee] = useState(
@@ -699,6 +700,10 @@ function Body() {
       }   
   ]
   )
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus === false){
+    return <h1 className='m-20 text-6xl'> Looks like you're offline!! Please check your internet connection!!!😒😒</h1>;
+  }
   return (
     <div className='body'>
         <div className='filter'>
